@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    <NavBar />
+    <!-- <NavBar /> -->
     <router-view />
   </div>
+  <!-- Use the AppFooter component -->
+  <!-- <AppFooter /> -->
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue';
+// import NavBar from './components/NavBar.vue';
+// import AppFooter from './components/AppFooter.vue';
+
 
 export default {
   name: 'App',
-  components: {
-    NavBar
-  }
+  // components: {
+  //   NavBar,
+  //   AppFooter
+  // }
 }
 </script>
 
