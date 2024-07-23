@@ -2,7 +2,7 @@
     <div class="admin-dashboard">
       <AdminSidebar />
       <div class="admin-body">
-        <AdminNavbar />
+        <!-- <AdminNavbar /> -->
         <div class="admin-content">
           <router-view />
         </div>
@@ -11,13 +11,13 @@
   </template>
   
   <script>
-  import AdminNavbar from '@/admin/components/AdminNavBar.vue';
+  // import AdminNavbar from '@/admin/components/AdminNavBar.vue';
   import AdminSidebar from '@/admin/components/AdminSidebar.vue';
   
   export default {
     name: 'AdminDashboard',
     components: {
-      AdminNavbar,
+      // AdminNavbar,
       AdminSidebar
     }
   }

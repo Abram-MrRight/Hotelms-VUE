@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <header class="admin-navbar">
       <div class="navbar-center">
         <input type="text" placeholder="Search..." class="search-input" />
@@ -34,4 +34,4 @@
     width: 300px; /* Adjust the width as needed */
   }
   </style>
-  
+   -->
