@@ -4,9 +4,9 @@ import ManageBookings from '../admin/views/ManageBookings.vue';
 import ManageRooms from '../admin/views/ManageRooms.vue';
 import ManageReservations from '../admin/views/ManageReservations.vue';
 import ManageUsers from '../admin/views/ManageUsers.vue';
-import HomeView from '../views/Home.vue';
+import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/About.vue';
-
+import myHome from '../admin/views/myHome.vue';
 const routes = [
   {
     path: '/',
@@ -41,8 +41,14 @@ const routes = [
         path: 'users',
         name: 'ManageUsers',
         component: ManageUsers
-      }
+      },
+      
     ]
+  },
+  {
+    path: '/myHome',
+    name: 'myHome',
+    component: myHome
   }
 ];
 
