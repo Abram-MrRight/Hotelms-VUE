@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import AdminDashboard from '../admin/views/AdminDashboard.vue';
 import ManageBookings from '../admin/views/ManageBookings.vue';
-import ManageRooms from '../admin/views/ManageRooms.vue';
+import ManageRooms from '../admin/components/ManageRooms.vue';
 import ManageReservations from '../admin/views/ManageReservations.vue';
 import ManageUsers from '../admin/views/ManageUsers.vue';
 import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/About.vue';
 import myHome from '../admin/views/myHome.vue';
+import ShowALRooms from '../admin/components/ShowRooms.vue'
 const routes = [
   {
     path: '/',
@@ -23,22 +24,18 @@ const routes = [
     component: AdminDashboard,
     children: [
       {
-        path: 'bookings',
+        path: '/bookings',
         name: 'ManageBookings',
         component: ManageBookings
       },
+     
       {
-        path: 'rooms',
-        name: 'ManageRooms',
-        component: ManageRooms
-      },
-      {
-        path: 'reservations',
+        path: '/reservations',
         name: 'ManageReservations',
         component: ManageReservations
       },
       {
-        path: 'users',
+        path: '/users',
         name: 'ManageUsers',
         component: ManageUsers
       },
@@ -49,7 +46,17 @@ const routes = [
     path: '/myHome',
     name: 'myHome',
     component: myHome
-  }
+  },
+  {
+    path: '/rooms',
+    name: 'ManageRooms',
+    component: ManageRooms
+  },
+  {
+    path: '/showRooms',
+    name: 'RoomList',
+    component: ShowALRooms
+  },
 ];
 
 const router = createRouter({

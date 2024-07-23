@@ -10,8 +10,10 @@
           <!--change to offline or busy as needed-->
         </div>
         <div class="nav-profile-text d-flex ml-0 mb-3 flex-column">
-          <span class="font-weight-semibold mb-1 mt-2 text-center">Antonio Olson</span>
-          <span class="text-secondary icon-sm text-center">$3499.00</span>
+          <span class="font-weight-semibold mb-1 mt-2 text-center">Atong Abraham</span>
+          <span class="text-secondary icon-sm text-center">
+            <button class="danger">logout</button>  
+          </span>
         </div>
       </a>
     </li>
@@ -46,10 +48,10 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="mdi mdi-hotel menu-icon"></i>
-        <span class="menu-title">Rooms</span>
-      </a>
+    <router-link class="nav-link" to="/showRooms">
+      <i class="mdi mdi-hotel menu-icon"></i>
+      <span class="menu-title">Rooms</span>
+    </router-link>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">
