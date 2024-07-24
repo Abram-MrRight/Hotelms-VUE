@@ -1,10 +1,9 @@
 <template>
-  <div class="container-scroller">
-    <!-- Include the Sidebar component -->
-    <AdminSidebar />
-    <div class="container-fluid page-body-wrapper">
-      <!-- Include the Navbar component -->
-      <AdminNav />
+    <div class="container-scroller">
+      <!-- Include the Sidebar component -->
+      <AdminSidebar />
+  
+      <div class="container-fluid page-body-wrapper">
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -68,87 +67,66 @@
       </div>
       <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-</template>
-
-<script>
-import AdminSidebar from "@/admin/components/AdminSidebar.vue";
-import AdminNav from "@/admin/components/AdminNavBar.vue";
-
-export default {
-  components: {
-    AdminSidebar,
-    AdminNav
-  },
-  data() {
-    return {
-      totalUsers: 0,
-      totalRooms: 0,
-      totalReservations: 0,
-      confirmedReservations: 0,
-      availableRooms: 0
-    };
-  },
-  created() {
-    this.fetchDashboardData();
-  },
-  methods: {
-    fetchDashboardData() {
-      // Fetch data from the API and update the state
-      this.totalUsers = 100; // Example data
-      this.totalRooms = 50;
-      this.totalReservations = 30;
-      this.confirmedReservations = 25;
-      this.availableRooms = 20;
+    </div>
+    <!-- container-scroller -->
+  </template>
+  
+  <script>
+import AdminSidebar from './AdminSidebar.vue'; 
+  
+  export default {
+    components: {
+      AdminSidebar
+    },
+    data() {
+      return {
+        totalUsers: 0,
+        totalRooms: 0,
+        totalReservations: 0,
+        confirmedReservations: 0,
+        availableRooms: 0
+      };
+    },
+    created() {
+      this.fetchDashboardData();
+    },
+    methods: {
+      fetchDashboardData() {
+        // Fetch data from the API and update the state
+        this.totalUsers = 100; // Example data
+        this.totalRooms = 50;
+        this.totalReservations = 30;
+        this.confirmedReservations = 25;
+        this.availableRooms = 20;
+      }
     }
+  };
+  </script>
+  
+  <style scoped>
+  .navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
   }
-};
-</script>
-
-<style scoped>
-.container-scroller {
-  display: flex;
-}
-
-.page-body-wrapper {
-  margin-left: 250px; /* Adjust this value based on the width of the sidebar */
-  width: 100%;
-  overflow: hidden;
-}
-
-.main-panel {
-  margin-top: 60px; /* Adjust this value based on the height of the navbar */
-  padding: 20px; /* Add padding to prevent content from sticking to edges */
-}
-
-.navbar {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  z-index: 1000;
-  background-color: black
-}
-
-.card {
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.icon-lg {
-  font-size: 3rem;
-}
-</style>
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .icon-lg {
+    font-size: 3rem;
+  }
+  </style>
+  

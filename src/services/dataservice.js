@@ -8,6 +8,22 @@ const http = axios.create({
 });
 
 class DataService {
+
+
+    async validateReferences(userId, roomId) {
+        try {
+          const userResponse = await axios.get(`/api/users/${userId}`);
+          const roomResponse = await axios.get(`/api/rooms/${roomId}`);
+          
+          if (userResponse.status === 200 && roomResponse.status === 200) {
+            return true;
+          }
+        } catch (error) {
+          console.error('Validation failed:', error);
+          return false;
+        }
+      }
+    
   // Retrieve all rooms
   getAllRooms() {
     return http.get("/fetchRooms");
@@ -108,6 +124,16 @@ class DataService {
       return response;
     } catch (error) {
       console.error('Error checking room availability:', error);
+      throw error;
+    }
+  }
+
+  async fetchDashboardData() {
+    try {
+      const response = await http.get('/analytics');
+      return response; // Ensure this matches the actual API response
+    } catch (error) {
+      console.error('Error fetching analystics data:', error);
       throw error;
     }
   }

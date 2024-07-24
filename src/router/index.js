@@ -10,6 +10,10 @@ import ShowALRooms from '../admin/components/ShowRooms.vue';
 import ManageRooms from '../admin/components/ManageRooms.vue';
 import AddRoom from '../admin/components/AddRoom.vue';
 import ReservationList from '../admin/components/ReservationList.vue';
+import AddReservation from '../admin/components/AddReservation.vue';
+import AdminHomeDashboard from '../admin/components/AdminHomeDashboard.vue';
+import ShowAnalystics from '../admin/components/AnalysticsPage.vue';
+
 
 const routes = [
   {
@@ -70,8 +74,23 @@ const routes = [
     name: 'ReservationList',
     component: ReservationList
   },
+  {
+    path: '/add-reservation',
+    name: 'AddReservation',
+    component: AddReservation
+  },
+  {
+    path: '/homeDashboard',
+    name: 'AdminHomeDashboard',
+    component: AdminHomeDashboard
+  },
+  {
+    path: '/showAnalystics',
+    name: 'ShowAnalystics',
+    component: ShowAnalystics
+  },
 
-
+  
   
 ];
 

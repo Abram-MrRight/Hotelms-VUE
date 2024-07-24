@@ -1,4 +1,8 @@
 <template>
+  <div class="container-scroller d-flex">
+    <!-- Include the Sidebar component -->
+    <AdminSidebar />
+
   <div class="rooms-list-container">
     <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -32,13 +36,18 @@
       </tbody>
     </table>
   </div>
+</div>
 </template>
 
 <script>
+import AdminSidebar from './AdminSidebar.vue'; 
 import DataService from '../../services/dataservice';
 import Swal from 'sweetalert2';
 
 export default {
+  components: {
+    AdminSidebar
+  },
   data() {
     return {
       rooms: []
@@ -123,8 +132,7 @@ export default {
 
 <style scoped>
 .rooms-list-container {
-  max-width: 1000px;
-  margin: 0 auto;
+  flex-grow: 1;
   padding: 2rem;
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -135,7 +143,7 @@ export default {
   margin-bottom: 1rem;
 }
 
-.table th, .table td {
+/* .table th, .table td {
   vertical-align: middle;
-}
+} */
 </style>

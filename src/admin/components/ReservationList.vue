@@ -1,5 +1,10 @@
 <template>
-  <div class="reservations-list-container">
+  <div class="container-scroller d-flex">
+
+    <!-- Include the Sidebar component -->
+    <AdminSidebar />
+
+    <div class="reservations-list-container">
     <form class="d-flex" role="search" @submit.prevent="searchReservations">
       <input v-model="searchQuery" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
@@ -42,13 +47,19 @@
       </tbody>
     </table>
   </div>
+  </div>
+  
 </template>
 
 <script>
+import AdminSidebar from './AdminSidebar.vue'; 
 import DataService from '../../services/dataservice';
 import Swal from 'sweetalert2';
 
 export default {
+  components: {
+    AdminSidebar
+  },
   data() {
     return {
       reservations: [],
@@ -147,8 +158,7 @@ export default {
 
 <style scoped>
 .reservations-list-container {
-  max-width: 1000px;
-  margin: 0 auto;
+  flex-grow: 1;
   padding: 2rem;
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

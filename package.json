@@ -13,9 +13,11 @@
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",
+    "chart.js": "^4.4.3",
     "core-js": "^3.8.3",
     "sweetalert2": "^11.12.3",
     "vue": "^3.2.13",
+    "vue-chartjs": "^5.3.1",
     "vue-router": "^4.4.0",
     "vue-toastification": "^2.0.0-rc.5",
     "vuetify": "^3.6.13"
@@ -29,7 +31,9 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "sass": "^1.77.8",
-    "sass-loader": "^14.2.1"
+    "sass-loader": "^14.2.1",
+    "typescript": "^5.5.4",
+    "vue-class-component": "^7.2.6"
   },
   "eslintConfig": {
     "root": true,
