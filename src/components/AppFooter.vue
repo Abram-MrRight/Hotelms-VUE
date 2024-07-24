@@ -1,48 +1,42 @@
 <template>
-  <footer class="footer bg-light text-center text-lg-start">
-    <div class="container p-4">
+  <footer class="footer">
+    <div class="background-water"></div>
+    <div class="footer-container">
       <div class="row">
-        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Hotel Pro</h5>
-          <p>
-            Your comfort is our priority. Enjoy the best services and amenities in our hotel.
+        <div class="column">
+          <img src="../assets/logo1.jpeg" alt="logo image">
+          <p class="address">
+            Hotel Pro<br />
+            123 Hotel Street<br />
+            City, Country
           </p>
         </div>
-
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Links</h5>
-          <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#!" class="text-dark">Home</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark">Contact</a>
-            </li>
-          </ul>
+        <div class="column">
+          <p class="heading">CONNECT WITH US</p>
+          <div class="social-icons">
+            <a href="#" class="footer-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="footer-link"><i class="fab fa-instagram"></i></a>
+          </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Contact</h5>
-          <ul class="list-unstyled mb-0">
-            <li>
-              <p class="text-dark mb-0">123 Hotel Street</p>
-            </li>
-            <li>
-              <p class="text-dark mb-0">City, Country</p>
-            </li>
-            <li>
-              <p class="text-dark mb-0">+1 234 567 890</p>
-            </li>
-            <li>
-              <p class="text-dark mb-0">email@example.com</p>
-            </li>
-          </ul>
+        <div class="column">
+          <p class="legal-text">
+            Hotel Pro is your home away from home.<br />
+            Your comfort is our priority.
+          </p>
         </div>
       </div>
-    </div>
-
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2024 Hotel Pro. All rights reserved.
+      <div class="footer-bottom">
+        <ul class="footer-links">
+          <li><a href="#!" class="footer-link-item">Home</a></li>
+          <li><a href="#!" class="footer-link-item">Booking</a></li>
+          <li><a href="#!" class="footer-link-item">Rooms</a></li>
+          <li><a href="#!" class="footer-link-item">Contact</a></li>
+        </ul>
+        <div class="copyright">
+          &copy; {{ new Date().getFullYear() }} Hotel Pro. All rights reserved.
+        </div>
+      </div>
     </div>
   </footer>
 </template>
@@ -50,33 +44,142 @@
 <script>
 export default {
   name: 'AppFooter',
+  data() {
+    return {
+      logo: require('../assets/logo1.jpeg')
+    };
+  },
 };
 </script>
 
 <style scoped>
 .footer {
-  position: fixed;
-  bottom: 0;
+  padding: 5% 2.5%;
+  background: #f5f5f5;
   width: 100%;
-  box-shadow: 0 -4px 8px -3px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
-  padding: 20px 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.footer .text-uppercase {
-  text-transform: uppercase;
+.background-water {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../assets/logo1.jpeg') no-repeat center center;
+  background-size: cover;
+  opacity: 0.1;
+  z-index: -1;
 }
 
-.footer .text-dark {
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 20px;
+}
+
+.column {
+  flex: 1;
+  margin: 10px;
+}
+
+.footer-link {
   color: #333;
-  transition: color 0.3s;
+  margin: 0 10px;
+  font-size: 20px;
+  text-decoration: none;
 }
 
-.footer .text-dark:hover {
-  color: #007bff;
+.footer-link:hover {
+  color: green;
+  transition: 200ms ease-in;
 }
 
-.footer .p-3 {
-  padding: 1rem;
+.heading {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+}
+
+.social-icons i {
+  font-size: 20px;
+  color: #333;
+}
+
+.social-icons i:hover {
+  color: green;
+  transition: 200ms ease-in;
+}
+
+.address {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.legal-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ddd;
+  padding: 10px 20px;
+  background-color: #30a5e9;
+  text-align: center;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-link-item {
+  color: #333;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.footer-link-item:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  max-width: 190px;
+  height: auto;
+}
+
+.copyright {
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  font-size: 14px;
 }
 </style>
