@@ -16,12 +16,6 @@
               <a href="#!" class="text-dark">Home</a>
             </li>
             <li>
-              <a href="#!" class="text-dark">Booking</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark">Rooms</a>
-            </li>
-            <li>
               <a href="#!" class="text-dark">Contact</a>
             </li>
           </ul>
