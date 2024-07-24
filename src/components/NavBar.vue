@@ -12,20 +12,14 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Booking</a>
+          <router-link to="/book/roomId" class="nav-link">Booking</router-link>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Rooms
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
+            <li class="nav-item">
+              <router-link to="/edit-room/roomId" class="nav-link">Rooms</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/booking-details" class="nav-link">Booking Details</router-link>
+            </li>
         </ul>
         <form class="d-flex mx-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
