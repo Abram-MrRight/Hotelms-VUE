@@ -43,10 +43,6 @@
                     <td>{{ room.roomType }}</td>
                     <td>{{ room.price }}</td>
                     <td>{{ room.availability }}</td>
-                    <td>
-                        <button @click="editRoom(room)" class="btn edit">Edit</button>
-                        <button @click="deleteRoom(room.id)" class="btn delete">Delete</button>
-                    </td>
                 </tr>
             </tbody>
         </table>

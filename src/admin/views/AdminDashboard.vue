@@ -53,11 +53,12 @@
       <span class="menu-title">Rooms</span>
     </router-link>
     </li>
+
     <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="mdi mdi-calendar-check menu-icon"></i>
-        <span class="menu-title">Reservations</span>
-      </a>
+    <router-link class="nav-link" to="/showReservations">
+      <i class="mdi mdi-calendar-check menu-icon"></i>
+      <span class="menu-title">Reservations</span>
+    </router-link>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">
