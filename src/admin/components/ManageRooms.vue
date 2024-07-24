@@ -19,8 +19,8 @@
         <div class="col-md-6">
           <label for="availability" class="form-label">Availability</label>
           <select id="availability" class="form-select" v-model="form.status">
-            <option value="Available">Available</option>
-            <option value="Unavailable">Unavailable</option>
+            <option value="available">Available</option>
+            <option value="booked">Booked</option>
           </select>
         </div>
         <div class="col-12">
@@ -43,28 +43,45 @@ export default {
         number: '',
         type: '',
         price: '',
-        status: 'Available'
+        status: 'available'
       },
       selectedRoom: null
     };
   },
   methods: {
+    
+    
     async fetchRoom() {
-      const roomId = this.$route.query.id;
-      if (roomId) {
-        try {
-          const response = await DataService.getRoomById(roomId);
+    const roomId = this.$route.query.id;
+    if (roomId) {
+      try {
+        const response = await DataService.getRoomById(roomId);
+        console.log('API Response:', response);
+        
+        // Check response data structure
+        console.log('Response Data:', response.data);
+        
+        // Ensure data exists and is in the expected format
+        if (response.data) {
           this.selectedRoom = response.data;
-          this.form = { ...this.selectedRoom };
-        } catch (error) {
-          console.error('Error fetching room:', error);
+          this.form = {
+            number: this.selectedRoom.number || '',
+            type: this.selectedRoom.type || '',
+            price: this.selectedRoom.price || '',
+            status: this.selectedRoom.status || 'Available'
+          };
+        } else {
+          console.error('No data returned from API');
         }
+      } catch (error) {
+        console.error('Error fetching room:', error);
       }
-    },
+    }
+  },
     async handleSubmit() {
       try {
         if (this.selectedRoom) {
-          await DataService.updateRoom(this.selectedRoom.id, this.form);
+          await DataService.updateRoom(this.selectedRoom.room_id, this.form);
           this.$router.push({ name: 'RoomList' }); // Navigate back to the room list or another appropriate page
         }
       } catch (error) {
@@ -76,7 +93,7 @@ export default {
         number: '',
         type: '',
         price: '',
-        status: 'Available'
+        status: 'available'
       };
       this.selectedRoom = null;
       this.$router.push({ name: 'RoomList' }); // Navigate back to the room list or another appropriate page
