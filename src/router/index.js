@@ -5,7 +5,6 @@ import ManageReservations from '../admin/views/ManageReservations.vue';
 import ManageUsers from '../admin/views/ManageUsers.vue';
 import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/About.vue';
-import myHome from '../admin/views/myHome.vue';
 
 import RoomList from '../components/RoomList.vue';
 import BookingForm from '../components/BookingForm.vue';
@@ -16,12 +15,12 @@ import ManageRooms from '../admin/components/ManageRooms.vue';
 import AddRoom from '../admin/components/AddRoom.vue';
 import ReservationList from '../admin/components/ReservationList.vue';
 import AddReservation from '../admin/components/AddReservation.vue';
-import AdminHomeDashboard from '../admin/components/AdminHomeDashboard.vue';
 import ShowAnalystics from '../admin/components/AnalysticsPage.vue';
 import ShowUsers from '../admin/components/showUsers.vue';
 import AddUser from '../admin/components/AddUser.vue';
 import RegisterAdmin from '../admin/views/RegisterAdmin.vue';
 import LoginAdmin from '../admin/views/AdminDashboard.vue';
+import EditRoom from '../admin/components/EditRoom.vue';
 
 const routes = [
   {
@@ -57,11 +56,7 @@ const routes = [
       
     ]
   },
-  {
-    path: '/myHome',
-    name: 'myHome',
-    component: myHome
-  },
+  
   {
     path: '/rooms',
     name: 'ManageRooms',
@@ -106,11 +101,11 @@ const routes = [
     name: 'AddReservation',
     component: AddReservation
   },
-  {
-    path: '/homeDashboard',
-    name: 'AdminHomeDashboard',
-    component: AdminHomeDashboard
-  },
+  // {
+  //   path: '/homeDashboard',
+  //   name: 'AdminHomeDashboard',
+  //   component: AdminHomeDashboard
+  // },
   {
     path: '/showAnalystics',
     name: 'ShowAnalystics',
@@ -139,6 +134,11 @@ const routes = [
     name: 'LoginAdmin',
     component: LoginAdmin
   },
+
+  { path: '/editRoomAdmin/', 
+    name: 'EditRoom', 
+    component: EditRoom
+   },
   
 
 ];

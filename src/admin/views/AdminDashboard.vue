@@ -58,7 +58,7 @@ export default {
         // Store the token (e.g., in localStorage)
         localStorage.setItem('authToken', token);
         // Redirect to the admin dashboard or another page
-        this.$router.push('/homeDashboard');
+        this.$router.push('/showAnalystics');
       } catch (error) {
         // Handle errors
         const errorMessage = error.response?.data?.message || error.message || 'Unknown error occurred';

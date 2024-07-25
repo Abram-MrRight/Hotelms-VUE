@@ -75,7 +75,7 @@ export default {
       this.$router.push({ path: '/add-room' });
     },
     editRoom(roomId) {
-      this.$router.push({ path: '/rooms', query: { id: roomId } });
+      this.$router.push({ path: '/editRoomAdmin', query: { id: roomId } });
     },
     async confirmDeleteRoom(roomId) {
       try {

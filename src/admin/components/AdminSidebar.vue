@@ -29,7 +29,7 @@
       </li>
       
       <li class="nav-item">
-        <router-link class="nav-link text-white" to="/homeDashboard">
+        <router-link class="nav-link text-white" to="/showAnalystics">
           <i class="mdi mdi-hotel menu-icon text-white"></i>
           <span class="menu-title font-weight-bold text-white">Dashboard</span>
         </router-link>
@@ -55,12 +55,12 @@
           <span class="menu-title font-weight-bold text-white">Reservations</span>
         </router-link>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <router-link class="nav-link text-white" to="/showAnalystics">
           <i class="mdi mdi-chart-bar menu-icon text-white"></i>
           <span class="menu-title font-weight-bold text-white">Analytics</span>
         </router-link>
-      </li>
+      </li> -->
       
       <li class="nav-item">
         <a class="nav-link text-white" href="#">
