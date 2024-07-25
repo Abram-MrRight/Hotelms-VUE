@@ -13,7 +13,7 @@ import RoomList from '../components/RoomList.vue';
 import BookingForm from '../components/BookingForm.vue';
 import BookingDetails from '../components/BookingDetails.vue';
 
-import ShowALRooms from '../admin/components/ShowRooms.vue';
+import RoomDetails from '../views/RoomDetails.vue';
 import ManageRooms from '../admin/components/ManageRooms.vue';
 import AddRoom from '../admin/components/AddRoom.vue';
 import ReservationList from '../admin/components/ReservationList.vue';
@@ -42,7 +42,7 @@ const routes = [
         name: 'ManageBookings',
         component: ManageBookings
       },
-     
+
       {
         path: '/reservations',
         name: 'ManageReservations',
@@ -53,7 +53,7 @@ const routes = [
         name: 'ManageUsers',
         component: ManageUsers
       },
-      
+
     ]
   },
   {
@@ -72,23 +72,31 @@ const routes = [
     component: ShowALRooms
   },
 
+  {
+    path: '/room-details',
+    name: 'RoomDetails',
+    component: RoomDetails
+  },
 
- 
-    { path: '/', 
-      component: RoomList 
-    },
-    { path: '/book/:roomId',
-      name: 'bookingForm', 
-      component: BookingForm
-       },
-    { path: '/booking-details',
-      name: 'bookingDetails',
-      component: BookingDetails 
-      },
-    { path: '/edit-room/:roomId', 
-      name: 'editRoom', 
-      component: RoomList
-     },
+  {
+    path: '/',
+    component: RoomList
+  },
+  {
+    path: '/book/:roomId',
+    name: 'bookingForm',
+    component: BookingForm
+  },
+  {
+    path: '/booking-details',
+    name: 'bookingDetails',
+    component: BookingDetails
+  },
+  {
+    path: '/edit-room/:roomId',
+    name: 'editRoom',
+    component: RoomList
+  },
 
   {
     path: '/add-room',
@@ -116,8 +124,8 @@ const routes = [
     component: ShowAnalystics
   },
 
-  
-  
+
+
 
 ];
 

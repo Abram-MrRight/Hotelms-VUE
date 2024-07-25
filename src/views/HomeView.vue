@@ -8,7 +8,9 @@
       <div class="hero-content">
         <h1>Welcome to Luxury Stay</h1>
         <p>Experience the finest hospitality and luxurious comfort</p>
-        <button class="book-now-btn">Book Now</button>
+        <RouterLink to="/booking-details">
+          <button class="book-now-btn">Book Now</button>
+        </RouterLink>
       </div>
     </section>
 
@@ -27,7 +29,10 @@
           <p>Luxurious suite with separate living area and panoramic views</p>
         </div>
       </div>
-      <button class="see-more-btn" @click="goToRoomsPage">See More</button>
+      <RouterLink to="/room-details">
+        <button class="see-more-btn">See More</button>
+      </RouterLink>
+
     </section>
 
     <!-- Amenities Section -->
@@ -75,7 +80,9 @@
     <!-- Call to Action Section -->
     <section class="cta">
       <h2>Ready to Experience Luxury?</h2>
-      <button class="book-now-btn">Book Your Stay Now</button>
+      <RouterLink to="/booking-details">
+        <button class="book-now-btn">Book your stay with us</button>
+      </RouterLink>
     </section>
 
     <!-- Use the AppFooter component -->
@@ -87,6 +94,7 @@
 import AppFooter from '@/components/AppFooter.vue';
 import NavBar from '@/components/NavBar.vue';
 
+
 export default {
   name: 'HomeView',
   components: {
@@ -94,8 +102,9 @@ export default {
     NavBar
   },
   methods: {
+
     goToRoomsPage() {
-      this.$router.push({ name: 'Rooms' });
+      this.$router.push({ name: '/booking-details' });
     }
   }
 };
