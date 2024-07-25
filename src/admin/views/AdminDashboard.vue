@@ -1,154 +1,151 @@
 <template>
-  <div class="container-scroller">
-    <!-- Include the Sidebar component -->
-    <AdminSidebar />
-    <div class="container-fluid page-body-wrapper">
-      <!-- Include the Navbar component -->
-      <AdminNav />
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Total Users</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ totalUsers }}</h2>
-                    <i class="mdi mdi-account-multiple-outline icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Total Rooms</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ totalRooms }}</h2>
-                    <i class="mdi mdi-hotel icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Total Reservations</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ totalReservations }}</h2>
-                    <i class="mdi mdi-calendar-check icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Confirmed Reservations</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ confirmedReservations }}</h2>
-                    <i class="mdi mdi-check-circle-outline icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Available Rooms</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ availableRooms }}</h2>
-                    <i class="mdi mdi-hotel icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="container">
+    <div class="login-wrapper">
+      <h1 class="text-center">Admin Login</h1>
+      <form @submit.prevent="handleLogin">
+        <div class="form-group">
+          <label for="username">First Name</label>
+          <input type="text" id="username" v-model="username" required />
         </div>
-      </div>
-      <!-- main-panel ends -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model="password" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <div class="links">
+          <a @click="navigateToForgotPassword" class="link">Forgot Password?</a>
+          <a @click="navigateToRegister" class="link register-link">Don't have an account? Register</a>
+        </div>
+      </form>
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
 </template>
 
 <script>
-import AdminSidebar from "@/admin/components/AdminSidebar.vue";
-import AdminNav from "@/admin/components/AdminNavBar.vue";
+import DataService from '@/services/dataservice';
+import { useToast } from 'vue-toastification';
 
 export default {
-  components: {
-    AdminSidebar,
-    AdminNav
-  },
   data() {
     return {
-      totalUsers: 0,
-      totalRooms: 0,
-      totalReservations: 0,
-      confirmedReservations: 0,
-      availableRooms: 0
+      username: '',
+      password: ''
     };
   },
-  created() {
-    this.fetchDashboardData();
+  setup() {
+    const toast = useToast();
+    return { toast };
   },
   methods: {
-    fetchDashboardData() {
-      // Fetch data from the API and update the state
-      this.totalUsers = 100; // Example data
-      this.totalRooms = 50;
-      this.totalReservations = 30;
-      this.confirmedReservations = 25;
-      this.availableRooms = 20;
+    async handleLogin() {
+      try {
+        // Validate input
+        if (!this.username || !this.password) {
+          this.toast.error('Please fill in all fields.');
+          return;
+        }
+
+        // Call the API to log in the admin
+        const response = await DataService.loginAdmin({
+          first_name: this.username,
+          password: this.password
+        });
+        
+
+        // Handle success
+        this.toast.success('Login successful!');
+        const { token } = response.data;
+        // Store the token (e.g., in localStorage)
+        localStorage.setItem('authToken', token);
+        // Redirect to the admin dashboard or another page
+        this.$router.push('/homeDashboard');
+      } catch (error) {
+        // Handle errors
+        const errorMessage = error.response?.data?.message || error.message || 'Unknown error occurred';
+        this.toast.error(`Failed to log in: ${errorMessage}`);
+      }
+    },
+    navigateToForgotPassword() {
+      // Navigate to the forgot password screen
+      this.$router.push({ path: '/forgot-password' });
+    },
+    navigateToRegister() {
+      // Navigate to the register screen
+      this.$router.push({ path: '/register' });
     }
   }
 };
 </script>
 
 <style scoped>
-.container-scroller {
+.container {
   display: flex;
-}
-
-.page-body-wrapper {
-  margin-left: 250px; /* Adjust this value based on the width of the sidebar */
-  width: 100%;
-  overflow: hidden;
-}
-
-.main-panel {
-  margin-top: 60px; /* Adjust this value based on the height of the navbar */
-  padding: 20px; /* Add padding to prevent content from sticking to edges */
-}
-
-.navbar {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  z-index: 1000;
-  background-color: black
-}
-
-.card {
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f4f4;
+}
+
+.login-wrapper {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.links {
+  margin-top: 1rem;
   text-align: center;
 }
 
-.icon-lg {
-  font-size: 3rem;
+.link {
+  color: #ff0000; /* Red color for links */
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.register-link {
+  font-weight: bold;
 }
 </style>

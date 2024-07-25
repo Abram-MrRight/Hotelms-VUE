@@ -1,39 +1,33 @@
 <template>
     <div class="container-scroller d-flex">
-  
       <!-- Include the Sidebar component -->
       <AdminSidebar />
   
       <div class="content-wrapper flex-grow-1">
-        <div class="add-room">
-          <h1>Add Room</h1>
+        <div class="add-user">
+          <h1>Add User</h1>
   
-          <!-- Room Form -->
+          <!-- User Form -->
           <form @submit.prevent="handleSubmit">
             <div class="form-group">
-              <label for="room-number">Room Number</label>
-              <input type="text" id="room-number" v-model="form.number" required />
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" v-model="form.first_name" required />
             </div>
             <div class="form-group">
-              <label for="room-type">Room Type</label>
-              <input type="text" id="room-type" v-model="form.type" required />
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" v-model="form.last_name" required />
             </div>
             <div class="form-group">
-              <label for="price">Price</label>
-              <input type="number" id="price" v-model="form.price" required />
-            </div>
-            <div class="form-group">
-              <label for="status">Availability</label>
-              <select id="status" v-model="form.status">
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
+              <label for="role">Role</label>
+              <select id="role" v-model="form.role">
+                <option value="admin">Admin</option>
+                <option value="customer">Customer</option>
               </select>
             </div>
-            <button type="submit" class="btn">Add Room</button>
+            <button type="submit" class="btn">Add User</button>
           </form>
         </div>
       </div>
-  
     </div>
   </template>
   
@@ -43,17 +37,16 @@
   import { useToast } from 'vue-toastification';
   
   export default {
-    name: 'AddRoom',
+    name: 'AddUser',
     components: {
       AdminSidebar
     },
     data() {
       return {
         form: {
-          number: '',
-          type: '',
-          price: '',
-          status: 'Available'
+          first_name: '',
+          last_name: '',
+          role: 'customer'
         }
       };
     },
@@ -64,21 +57,20 @@
     methods: {
       async handleSubmit() {
         try {
-          await DataService.addRoom(this.form);
-          this.toast.success('Room added successfully!');
+          await DataService.addUser(this.form);
+          this.toast.success('User added successfully!');
           this.resetForm();
         } catch (error) {
           const errorMessage = error.response?.data?.error || error.message || 'Unknown error occurred';
-          console.error('Error adding room:', errorMessage);
-          this.toast.error(`Failed to add room: ${errorMessage}`);
+          console.error('Error adding user:', errorMessage);
+          this.toast.error(`Failed to add user: ${errorMessage}`);
         }
       },
       resetForm() {
         this.form = {
-          number: '',
-          type: '',
-          price: '',
-          status: 'Available'
+          first_name: '',
+          last_name: '',
+          role: 'customer'
         };
       }
     }
@@ -98,7 +90,7 @@
     padding: 2rem;
   }
   
-  .add-room {
+  .add-user {
     flex-grow: 1;
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

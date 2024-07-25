@@ -1,90 +1,68 @@
 <template>
     <div class="container-scroller">
-      <!-- Include the Sidebar component -->
       <AdminSidebar />
-  
       <div class="container-fluid page-body-wrapper">
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Total Users</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ totalUsers }}</h2>
-                    <i class="mdi mdi-account-multiple-outline icon-lg text-primary"></i>
+        <AdminNav />
+        <div class="main-panel">
+          
+          <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Hotel Activities</h5>
+                    <ul>
+                      <li>Check-in: {{ checkInActivities }}</li>
+                      <li>Check-out: {{ checkOutActivities }}</li>
+                      <li>New Reservations: {{ newReservations }}</li>
+                    </ul>
                   </div>
                 </div>
               </div>
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Total Revenue</h5>
+                    <h2 class="font-weight-medium">${{ totalRevenue }}</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="content-wrapper">
+            <div class="row">
+              
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Advanced Calendar</h5>
+                    <FullCalendarComponent :events="calendarEvents" />
+                  </div>
+                </div> 
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Total Rooms</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ totalRooms }}</h2>
-                    <i class="mdi mdi-hotel icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Total Reservations</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ totalReservations }}</h2>
-                    <i class="mdi mdi-calendar-check icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Confirmed Reservations</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ confirmedReservations }}</h2>
-                    <i class="mdi mdi-check-circle-outline icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h5>Available Rooms</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="font-weight-medium">{{ availableRooms }}</h2>
-                    <i class="mdi mdi-hotel icon-lg text-primary"></i>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
+        <!-- main-panel ends -->
       </div>
-      <!-- main-panel ends -->
-    </div>
     </div>
     <!-- container-scroller -->
   </template>
   
   <script>
-import AdminSidebar from './AdminSidebar.vue'; 
+  import AdminSidebar from './AdminSidebar.vue';
+  import AdminNav from './AdminNavBar.vue';
+  import FullCalendarComponent from './FullCalendarComponent.vue';
   
   export default {
     components: {
-      AdminSidebar
+      AdminSidebar,
+      AdminNav,
+      FullCalendarComponent
     },
     data() {
       return {
-        totalUsers: 0,
-        totalRooms: 0,
-        totalReservations: 0,
-        confirmedReservations: 0,
-        availableRooms: 0
+        checkInActivities: 0,
+        checkOutActivities: 0,
+        newReservations: 0,
+        totalRevenue: 0,
+        calendarEvents: [] // Add your calendar events here
       };
     },
     created() {
@@ -93,11 +71,14 @@ import AdminSidebar from './AdminSidebar.vue';
     methods: {
       fetchDashboardData() {
         // Fetch data from the API and update the state
-        this.totalUsers = 100; // Example data
-        this.totalRooms = 50;
-        this.totalReservations = 30;
-        this.confirmedReservations = 25;
-        this.availableRooms = 20;
+        this.checkInActivities = 15; // Example data
+        this.checkOutActivities = 10;
+        this.newReservations = 5;
+        this.totalRevenue = 15000; // Example revenue
+        this.calendarEvents = [
+          { title: 'Event 1', start: '2024-07-25' },
+          { title: 'Event 2', start: '2024-07-26' }
+        ];
       }
     }
   };
@@ -116,7 +97,8 @@ import AdminSidebar from './AdminSidebar.vue';
   }
   .card {
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 trade;
+     map: 0, 0, 0.1;
   }
   .card-body {
     display: flex;

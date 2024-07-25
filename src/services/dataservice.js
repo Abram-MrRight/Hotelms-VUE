@@ -9,20 +9,6 @@ const http = axios.create({
 
 class DataService {
 
-
-    async validateReferences(userId, roomId) {
-        try {
-          const userResponse = await axios.get(`/api/users/${userId}`);
-          const roomResponse = await axios.get(`/api/rooms/${roomId}`);
-          
-          if (userResponse.status === 200 && roomResponse.status === 200) {
-            return true;
-          }
-        } catch (error) {
-          console.error('Validation failed:', error);
-          return false;
-        }
-      }
     
   // Retrieve all rooms
   getAllRooms() {
@@ -73,7 +59,20 @@ class DataService {
       const response = await http.post('/creareReservations', data);
       return response;
     } catch (error) {
-      console.error('Error creating reservation:', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('Error data:', error.response.data);
+        console.error('Error status:', error.response.status);
+        console.error('Error headers:', error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('Error request:', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error message:', error.message);
+      }
+      console.error('Error config:', error.config);
       throw error;
     }
   }
@@ -134,6 +133,57 @@ class DataService {
       return response; // Ensure this matches the actual API response
     } catch (error) {
       console.error('Error fetching analystics data:', error);
+      throw error;
+    }
+  }
+
+  async getAllUsers() {
+    try {
+      const response = await http.get('/users');
+      return response; 
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      throw error;
+    }
+  }
+  // Add a new user
+  async addUser(data) {
+    try {
+      const response = await http.post('/addUser', data); // Endpoint updated to '/add'
+      return response;
+    } catch (error) {
+      console.error('Error adding user:', error);
+      throw error;
+    }
+  }
+   // Delete room by ID
+   async deleteUser(id) {
+    try {
+      const response = await http.delete(`/deleteUsers/${id}`);
+      return response;
+    } catch (error) {
+      console.error('Error deleting room:', error);
+      throw error;
+    } 
+  }
+  // Register admin
+  async registerAdmin(data) {
+    try {
+      const response = await http.post('/register', data);
+      return response;
+    } catch (error) {
+      console.error('Error registering admin:', error);
+      throw error;
+    }
+  }
+
+  // Login admin
+  async loginAdmin(data) {
+    try {
+      const response = await http.post('/login', data);
+      return response;
+    } catch (error) {
+      console.error('Error logging in admin:', error);
       throw error;
     }
   }

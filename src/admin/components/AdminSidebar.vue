@@ -10,9 +10,7 @@
           </div>
           <div class="nav-profile-text d-flex ml-0 mb-3 flex-column">
             <span class="font-weight-semibold mb-1 mt-2 text-center text-white font-bold">Atong Abraham</span>
-            <span class="text-secondary icon-sm text-center">
-              <button class="btn btn-danger">Logout</button>
-            </span>
+            
           </div>
         </a>
       </li>
@@ -23,9 +21,9 @@
         <form class="d-flex align-items-center" action="#">
           <div class="input-group">
             <div class="input-group-prepend">
-              <i class="input-group-text border-0 mdi mdi-magnify text-white"></i>
+              <i class="input-group-text border-0 mdi mdi-magnify "></i>
             </div>
-            <input type="text" class="form-control border-0 text-white bg-dark" placeholder="Search" />
+            <input type="text" class="form-control border-0 text-white " placeholder="Search" />
           </div>
         </form>
       </li>
@@ -37,12 +35,14 @@
         </router-link>
       </li>
       
+     
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">
+        <router-link class="nav-link text-white" to="/showUsers">
           <i class="mdi mdi-account-multiple menu-icon text-white"></i>
           <span class="menu-title font-weight-bold text-white">Users</span>
-        </a>
+        </router-link>
       </li>
+
       <li class="nav-item">
         <router-link class="nav-link text-white" to="/showRooms">
           <i class="mdi mdi-hotel menu-icon text-white"></i>

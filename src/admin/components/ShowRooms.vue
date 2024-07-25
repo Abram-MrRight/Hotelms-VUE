@@ -4,6 +4,10 @@
     <AdminSidebar />
 
   <div class="rooms-list-container">
+    <AdminNav />
+        <br>
+        <br>
+        <br>
     <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
@@ -41,12 +45,14 @@
 
 <script>
 import AdminSidebar from './AdminSidebar.vue'; 
+import AdminNav from "./AdminNavBar.vue";
 import DataService from '../../services/dataservice';
 import Swal from 'sweetalert2';
 
 export default {
   components: {
-    AdminSidebar
+    AdminSidebar,
+    AdminNav
   },
   data() {
     return {

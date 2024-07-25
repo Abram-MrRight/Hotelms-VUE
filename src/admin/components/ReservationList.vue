@@ -1,80 +1,93 @@
 <template>
   <div class="container-scroller d-flex">
-
     <!-- Include the Sidebar component -->
     <AdminSidebar />
 
     <div class="reservations-list-container">
-    <form class="d-flex" role="search" @submit.prevent="searchReservations">
-      <input v-model="searchQuery" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-    <h1>All Reservations</h1>
-    <div class="d-flex justify-content-end mb-2">
-      <button @click="addReservation" class="btn btn-success">Add</button>
+      <AdminNav />
+      <br>
+        <br>
+        <br>
+      <form class="d-flex" role="search" @submit.prevent="searchReservations">
+        <input v-model="searchQuery" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <h1>All Reservations</h1>
+      <div class="d-flex justify-content-end mb-2">
+        <button @click="openAddReservationModal" class="btn btn-success">Add</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Reservation ID</th>
+            <th>Check-in Date</th>
+            <th>Check-out Date</th>
+            <th>Status</th>
+            <th>User</th>
+            <th>Room</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="reservation in reservations" :key="reservation.reservation_id">
+            <td>{{ reservation.reservation_id }}</td>
+            <td>{{ formatDate(reservation.check_in_date) }}</td>
+            <td>{{ formatDate(reservation.check_out_date) }}</td>
+            <td>{{ reservation.status }}</td>
+            <td>{{ reservation.user ? reservation.user.username : 'N/A' }}</td>
+            <td>{{ reservation.room ? `${reservation.room.number} (${reservation.room.type})` : 'N/A' }}</td>
+            <td>
+              <button @click="editReservation(reservation.reservation_id)" class="btn btn-primary btn-sm float-end">Edit</button>
+              <button 
+                @click="confirmDeleteReservation(reservation.reservation_id)"
+                :disabled="deletingReservation === reservation.reservation_id"
+                class="btn btn-danger btn-sm float-end"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Reservation ID</th>
-          <th>Check-in Date</th>
-          <th>Check-out Date</th>
-          <th>Status</th>
-          <th>User</th>
-          <th>Room</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="reservation in reservations" :key="reservation.reservation_id">
-          <td>{{ reservation.reservation_id }}</td>
-          <td>{{ formatDate(reservation.check_in_date) }}</td>
-          <td>{{ formatDate(reservation.check_out_date) }}</td>
-          <td>{{ reservation.status }}</td>
-          <td>{{ reservation.user ? reservation.user.username : 'N/A' }}</td>
-          <td>{{ reservation.room ? `${reservation.room.number} (${reservation.room.type})` : 'N/A' }}</td>
-          <td>
-            <button @click="editReservation(reservation.reservation_id)" class="btn btn-primary btn-sm float-end">Edit</button>
-            <button 
-              @click="confirmDeleteReservation(reservation.reservation_id)"
-              :disabled="deletingReservation === reservation.reservation_id"
-              class="btn btn-danger btn-sm float-end"
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
-  </div>
-  
 </template>
 
 <script>
-import AdminSidebar from './AdminSidebar.vue'; 
+import AdminSidebar from './AdminSidebar.vue';
+import AdminNav from "./AdminNavBar.vue";
 import DataService from '../../services/dataservice';
 import Swal from 'sweetalert2';
 
 export default {
   components: {
-    AdminSidebar
+    AdminSidebar,
+        AdminNav
+
   },
   data() {
     return {
       reservations: [],
       searchQuery: '',
-      deletingReservation: null // Track the ID of the reservation being deleted
+      deletingReservation: null, // Track the ID of the reservation being deleted
+      availableRooms: [] // Track available rooms
     };
   },
   methods: {
     async fetchReservations() {
       try {
         const response = await DataService.getAllReservations();
-        console.log('API Response:', response);
-        this.reservations = response.data; // Adjusted for direct array response
+        this.reservations = response.data;
       } catch (error) {
         console.error('Error fetching reservations:', error);
+      }
+    },
+    async fetchAvailableRooms() {
+      try {
+        const response = await DataService.getAllRooms();
+        this.availableRooms = response.data.filter(room => room.status === 'available');
+      } catch (error) {
+        console.error('Error fetching rooms:', error);
       }
     },
     formatDate(date) {
@@ -82,17 +95,32 @@ export default {
     },
     async searchReservations() {
       try {
-        const response = await DataService.getAllReservations(); 
+        const response = await DataService.getAllReservations();
         this.reservations = response.data.filter(reservation =>
           reservation.reservation_id.toString().includes(this.searchQuery) ||
-          (reservation.user && reservation.user.username.includes(this.searchQuery)) 
+          (reservation.user && reservation.user.username.includes(this.searchQuery))
         );
       } catch (error) {
         console.error('Error searching reservations:', error);
       }
     },
-    addReservation() {
+    openAddReservationModal() {
+      this.fetchAvailableRooms();
       this.$router.push({ path: '/add-reservation' });
+    },
+    async addReservation(reservationData) {
+      try {
+        if (this.availableRooms.some(room => room.id === reservationData.room_id)) {
+          await DataService.addReservation(reservationData);
+          await this.fetchReservations();
+          Swal.fire('Success!', 'Reservation added successfully.', 'success');
+        } else {
+          Swal.fire('Error!', 'The selected room is not available.', 'error');
+        }
+      } catch (error) {
+        console.error('Error adding reservation:', error);
+        Swal.fire('Error!', 'Failed to add the reservation.', 'error');
+      }
     },
     async editReservation(reservationId) {
       this.$router.push({ path: '/edit-reservation', query: { id: reservationId } });
