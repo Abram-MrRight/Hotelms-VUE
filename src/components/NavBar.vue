@@ -1,8 +1,9 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Hotel Pro</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -12,14 +13,13 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-          <router-link to="/book/roomId" class="nav-link">Booking</router-link>
+            <router-link to="/booking-details" class="nav-link">Booking</router-link>
           </li>
-            <li class="nav-item">
-              <router-link to="/edit-room/roomId" class="nav-link">Rooms</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/booking-details" class="nav-link">Booking Details</router-link>
-            </li>
+          <li class="nav-item">
+            <router-link to="/edit-room/roomId" class="nav-link">Rooms</router-link>
+          </li>
+
+
         </ul>
         <form class="d-flex mx-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -28,16 +28,15 @@
       </div>
     </div>
   </nav>
-  </template>
-  
-  <script>
-  export default {
-    name: 'NavBar'
-  };
- 
- </script>
-  
-  <style scoped>
+</template>
+
+<script>
+export default {
+  name: 'NavBar'
+};
+</script>
+
+<style scoped>
 .navbar {
   box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.1);
 }
@@ -50,7 +49,8 @@
 
 .nav-link {
   color: #333;
-  margin-right: 50px;
+  margin-right: 1rem;
+  /* Adjusted for better spacing */
   transition: color 0.3s;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .navbar-toggler {
-  border: red;
+  border: none;
 }
 
 .navbar-toggler-icon {
@@ -82,7 +82,7 @@
 }
 
 .btn-outline-success:hover {
-  background-color: hsl(212, 68%, 5%);
+  background-color: #007bff;
   color: white;
   border-color: #007bff;
 }
