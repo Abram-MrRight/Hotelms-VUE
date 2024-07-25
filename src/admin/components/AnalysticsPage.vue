@@ -3,6 +3,7 @@
       <!-- Include the Sidebar component -->
       <AdminSidebar />
       <div class="container-fluid page-body-wrapper">
+        <AdminNav />
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="row">
@@ -49,16 +50,18 @@
   
   <script>
   import AdminSidebar from "@/admin/components/AdminSidebar.vue";
+  import AdminNav from "./AdminNavBar.vue";
   import DataService from '../../services/dataservice';
   
   export default {
     components: {
-      AdminSidebar
+      AdminSidebar,
+      AdminNav
     },
     data() {
       return {
         dashboardItems: [
-          { title: 'Total Users', value: 0, iconClass: 'mdi mdi-account-multiple-outline icon-lg text-primary' },
+          { title: 'Guests Available', value: 0, iconClass: 'mdi mdi-account-multiple-outline icon-lg text-primary' },
           { title: 'Total Rooms', value: 0, iconClass: 'mdi mdi-hotel icon-lg text-primary' },
           { title: 'Total Reservations', value: 0, iconClass: 'mdi mdi-calendar-check icon-lg text-primary' },
           { title: 'Confirmed Reservations', value: 0, iconClass: 'mdi mdi-check-circle-outline icon-lg text-primary' },

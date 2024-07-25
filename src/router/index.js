@@ -7,8 +7,6 @@ import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/About.vue';
 import myHome from '../admin/views/myHome.vue';
 
-import ShowALRooms from '../admin/components/ShowRooms.vue'
-
 import RoomList from '../components/RoomList.vue';
 import BookingForm from '../components/BookingForm.vue';
 import BookingDetails from '../components/BookingDetails.vue';
@@ -20,7 +18,10 @@ import ReservationList from '../admin/components/ReservationList.vue';
 import AddReservation from '../admin/components/AddReservation.vue';
 import AdminHomeDashboard from '../admin/components/AdminHomeDashboard.vue';
 import ShowAnalystics from '../admin/components/AnalysticsPage.vue';
-
+import ShowUsers from '../admin/components/showUsers.vue';
+import AddUser from '../admin/components/AddUser.vue';
+import RegisterAdmin from '../admin/views/RegisterAdmin.vue';
+import LoginAdmin from '../admin/views/AdminDashboard.vue';
 
 const routes = [
   {
@@ -124,8 +125,34 @@ const routes = [
     component: ShowAnalystics
   },
 
+<<<<<<< HEAD
 
 
+=======
+  {
+    path: '/showUsers',
+    name: 'ShowUsers',
+    component: ShowUsers
+  },
+
+  {
+    path: '/add-user',
+    name: 'AddUser',
+    component: AddUser
+  },
+
+  {
+    path: '/register',
+    name: 'RegiisterAdmin',
+    component: RegisterAdmin
+  },
+  {
+    path: '/admin-login',
+    name: 'LoginAdmin',
+    component: LoginAdmin
+  },
+  
+>>>>>>> 648f5395bba3f77f82a10e404e59a4a3db89c397
 
 ];
 
